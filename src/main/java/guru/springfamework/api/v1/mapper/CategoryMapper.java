@@ -10,5 +10,10 @@ public interface CategoryMapper {
 
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
 
+    //Use of @Mapping
+    //@Mapping(source = “property”, target=”property_DTO”)
+    //ClassDTO classToClassDTO (Class class)
+
+    //@Mapping(source = "id", target = "id") //not necessary because the properties name is the same in both classes
     CategoryDTO categoryToCategoryDTO(Category category);
 }
