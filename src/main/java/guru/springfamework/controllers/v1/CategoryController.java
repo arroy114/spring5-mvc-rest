@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/v1/categories/")
+//@RequestMapping("/api/v1/categories/")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -20,17 +19,30 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    //ResponseEntity (extends HttpEntity):
+    //Use to represent the whole HTTP response: status code (+ headers) (+ body )
+
+    //@GetMapping
+    @GetMapping("/api/v1/categories/")
     public ResponseEntity<CatorgoryListDTO> getallCatetories(){
 
+        //Using ResponseEntity to represent body and status code
         return new ResponseEntity<CatorgoryListDTO>(
-                new CatorgoryListDTO(categoryService.getAllCategories()), HttpStatus.OK);
+                new CatorgoryListDTO(categoryService.getAllCategories()), HttpStatus.OK
+                //body: new CatorgoryListDTO(categoryService.getAllCategories()) => return a CatorgoryListDTO object
+                //status code: HttpStatus.OK
+        );
     }
 
-    @GetMapping("{name}") //{property}: assign value of the property from
+    //@GetMapping("{name}")
+    @GetMapping("/api/v1/categories/{name}") //{property}: assign value of the property from
     public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name){ //@PathVariable: extract values from the URI path
+
+        //Using ResponseEntity to represent body and status code
         return new ResponseEntity<CategoryDTO>(
                 categoryService.getCategoryByName(name), HttpStatus.OK
+                //body: categoryService.getCategoryByName(name) => return a CategoryDTO object
+                //status code: HttpStatus.OK
         );
     }
 }
