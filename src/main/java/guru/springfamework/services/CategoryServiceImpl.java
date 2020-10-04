@@ -25,8 +25,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDTO> getAllCategories() {
 
-        return categoryRepository.findAll()//this return a List object,
-                .stream()                   //but we have to change it stream of mapping
+        return categoryRepository
+                .findAll()//this return a List object,
+                .stream() //but we have to change it to stream for mapping
                 .map(categoryMapper::categoryToCategoryDTO) //return a stream of mapped object
                 .collect(Collectors.toList()); //convert from stream to list
 
